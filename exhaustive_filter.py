@@ -1,3 +1,4 @@
+# pip install pandas numpy scikit-learn tqdm
 import pandas as pd
 import numpy as np
 from itertools import permutations
@@ -36,8 +37,8 @@ def process_permutation(args):
         for j in range(d):
             # For each dimension j in the permutation:
             fj = pi[j]      # Current feature
-            fL = pi[max(0, j - 1)]  # Left neighbor feature (or same if j=0)
-            fR = pi[min(d - 1, j + 1)]  # Right neighbor feature (or same if j=d-1)
+            fL = pi[(j - 1) % d]        # Left neighboring feature
+            fR = pi[(j + 1) % d]        # Right neighboring feature
 
             # Consider both minimum and maximum points along feature fj
             for t in ['min', 'max']:
@@ -117,11 +118,17 @@ def extract_envelope_cases(input_csv, output_csv):
     for idx_set in envelope_indices.values():
         selected_indices.update(idx_set)
 
-    # Create the filtered dataframe with only envelope points
-    filtered_df = df.loc[sorted(selected_indices)]
-    # Save to output file
-    filtered_df.to_csv(output_csv, index=False)
-    print(f"Saved {len(filtered_df)} envelope cases to {output_csv}")
+    # Create the filtered dataframe with only envelope (coreset) points
+    coreset_df = df.loc[sorted(selected_indices)]
+
+    # Compute the evaluation set by dropping coreset indices
+    eval_df = df.drop(index=sorted(selected_indices))
+
+    # Save both sets
+    coreset_df.to_csv("output_coreset.csv", index=False)
+    eval_df.to_csv("output_eval.csv", index=False)
+    print(f"Saved {len(coreset_df)} coreset cases to output_coreset.csv")
+    print(f"Saved {len(eval_df)} evaluation cases to output_eval.csv")
 
 
 if __name__ == "__main__":
