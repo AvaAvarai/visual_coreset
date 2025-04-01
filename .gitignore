@@ -1,1 +1,7 @@
 venv/
+
+# Ignore all CSV files in the root directory
+/*.csv
+
+# Don't ignore CSV files in subdirectories
+!*/**/*.csv

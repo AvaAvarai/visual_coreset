@@ -8,8 +8,19 @@ Coresets are tested by training an SVM linear classifier on the coreset and eval
 
 58 cases extracted from WBC9 (former non-index wrapped version) yielding 98.20% accuracy.
 
+## Programs
+
+| Program | Description |
+|---------|-------------|
+| `minmax_filter.py` | Identifies boundary cases based on min-max values across dimensions. |
+| `exhaustive_filter.py` | Initial exhaustive algorithm, best results, slow. |
+
 ## References
 
 [1] <https://cs.stanford.edu/people/jure/pubs/craig-icml20.pdf>
 
 [2] <https://dl.acm.org/doi/pdf/10.1145/3580305.3599326>
+
+## License
+
+This project is licensed for both personal and commerical use under the MIT license, see [LICENSE](LICENSE) for full details.
