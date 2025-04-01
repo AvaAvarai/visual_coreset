@@ -6,6 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 from multiprocessing import Pool, cpu_count
 from tqdm import tqdm
 import sys
+import os
 
 
 def separation_distance(candidate, others, dim, axis_value):
@@ -124,11 +125,16 @@ def extract_envelope_cases(input_csv, output_csv):
     # Compute the evaluation set by dropping coreset indices
     eval_df = df.drop(index=sorted(selected_indices))
 
+    # Generate output filenames based on input filename
+    input_base = os.path.splitext(os.path.basename(input_csv))[0]
+    coreset_output = f"{input_base}_coreset.csv"
+    eval_output = f"{input_base}_eval.csv"
+
     # Save both sets
-    coreset_df.to_csv("output_coreset.csv", index=False)
-    eval_df.to_csv("output_eval.csv", index=False)
-    print(f"Saved {len(coreset_df)} coreset cases to output_coreset.csv")
-    print(f"Saved {len(eval_df)} evaluation cases to output_eval.csv")
+    coreset_df.to_csv(coreset_output, index=False)
+    eval_df.to_csv(eval_output, index=False)
+    print(f"Saved {len(coreset_df)} coreset cases to {coreset_output}")
+    print(f"Saved {len(eval_df)} evaluation cases to {eval_output}")
 
 
 if __name__ == "__main__":
