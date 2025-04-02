@@ -4,9 +4,10 @@ Novel coreset filter method using visual multidimensional geometry of computatio
 
 Coresets are tested by training an SVM linear classifier on the coreset and evaluating on the remaining known data throwing out any train samples.
 
-23 cases extracted from Fisher Iris yielding 96.06% accuracy.
-
-54 cases extracted from WBC9 yielding 97.36% accuracy.
+| Dataset     | Train Cases | Validation Cases | Accuracy   |
+|-------------|-------------|------------------|------------|
+| Fisher Iris | 23          | 127              | 96.06%     |
+| WBC9        | 54          | 645              | 97.36%     |
 
 ## Coreset Programs
 
