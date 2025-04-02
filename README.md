@@ -1,21 +1,23 @@
 # Visual Coreset
 
-Novel coreset filter method using visual multidimensional geometry.
+Novel coreset filter method using visual multidimensional geometry of computationally processing Parallel Coordinates data visualizations.
 
 Coresets are tested by training an SVM linear classifier on the coreset and evaluating on the remaining known data throwing out any train samples.
 
 23 cases extracted from Fisher Iris yielding 96.06% accuracy.
 
-58 cases extracted from WBC9 (former non-index wrapped version) yielding 98.20% accuracy.
+54 cases extracted from WBC9 yielding 97.36% accuracy.
 
-## Programs
+## Coreset Programs
+
+The main program currently is `exhaustive_filter.py`, however, additional algorithms are being tested and compared with this approach. The folder `./coresets` and sub-directories are for storing extracted train/eval splits found with this program.
 
 | Program | Description |
 |---------|-------------|
 | `minmax_filter.py` | Identifies boundary cases based on min-max values across dimensions. |
-| `exhaustive_filter.py` | Initial exhaustive algorithm, best results, slow. |
+| `exhaustive_filter.py` | Initial exhaustive algorithm, best results, slow but parallelizable. |
 
-## References
+## Academic References
 
 [1] <https://cs.stanford.edu/people/jure/pubs/craig-icml20.pdf>
 
