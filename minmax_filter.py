@@ -19,9 +19,14 @@ def normalize_and_split(input_csv):
     # Separate features and class
     features = [col for col in df.columns if col != class_col]
 
-    # Min-max normalization of features
-    df_normalized = df.copy()
-    df_normalized[features] = (df[features] - df[features].min()) / (df[features].max() - df[features].min())
+    # check if already min-max normalized
+    if df[features].min().min() == 0 and df[features].max().max() == 1:
+        print("Already min-max normalized")
+        df_normalized = df
+    else:
+        # Min-max normalization of features
+        df_normalized = df.copy()
+        df_normalized[features] = (df[features] - df[features].min()) / (df[features].max() - df[features].min())
 
     # Collect boundary indices
     boundary_indices = set()

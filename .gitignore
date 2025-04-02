@@ -5,3 +5,5 @@ venv/
 
 # Don't ignore CSV files in subdirectories
 !*/**/*.csv
+
+.DS_Store
